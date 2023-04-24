@@ -17,11 +17,19 @@ $(".btn").on("click", function () {
   let userChosenColor = $(this).attr("id");
   userClickedPattern.push(userChosenColor);
   playSound(userChosenColor);
+  animatePress(userChosenColor);
 });
 
 function playSound(name) {
   let audio = new Audio("sounds/" + name + ".mp3");
   audio.play();
+}
+
+function animatePress(currentColor) {
+  $("#" + currentColor).addClass("pressed");
+  setTimeout(function () {
+    $("#" + currentColor).removeClass("pressed");
+  }, 100);
 }
 
 nextSequence();
