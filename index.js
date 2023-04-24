@@ -5,10 +5,10 @@ let gameStarted = false;
 let level = 0;
 
 $(document).keypress(function () {
-  if (!started) {
+  if (!gameStarted) {
     $("#level-title").text("Level " + level);
     nextSequence();
-    started = true;
+    gameStarted = true;
   }
 });
 
@@ -22,6 +22,13 @@ function checkAnswer(currentLevel) {
       }, 1000);
     }
   } else {
+    let audio = new Audio("sounds/wrong.mp3");
+    audio.play();
+    $("body").addClass("game-over");
+    setTimeout(function () {
+      $("body").removeClass("game-over");
+    }, 200);
+    $("h1").text("Game Over. Press Any Key to Try Again");
     console.log("Wrong");
   }
 }
@@ -59,5 +66,3 @@ function animatePress(currentColor) {
     $("#" + currentColor).removeClass("pressed");
   }, 100);
 }
-
-nextSequence();
