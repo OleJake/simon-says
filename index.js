@@ -10,14 +10,18 @@ function nextSequence() {
     .fadeIn(100)
     .fadeOut(100)
     .fadeIn(100);
-  let audio = new Audio("sounds/" + randomChosenColor + ".mp3");
-  audio.play();
+  playSound(randomChosenColor);
 }
 
 $(".btn").on("click", function () {
   let userChosenColor = $(this).attr("id");
   userClickedPattern.push(userChosenColor);
-  console.log(userChosenColor);
+  playSound(userChosenColor);
 });
+
+function playSound(name) {
+  let audio = new Audio("sounds/" + name + ".mp3");
+  audio.play();
+}
 
 nextSequence();
